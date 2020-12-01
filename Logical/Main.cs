@@ -6,6 +6,6 @@ namespace Logical
 {
     public class Main
     {
-        Open_text OpenText();
+     
     }
 }
