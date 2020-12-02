@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Logical;
+
 namespace _19
 {
     public partial class Form1 : Form
@@ -17,22 +18,28 @@ namespace _19
         public Form1()
         {
             InitializeComponent();
-            FD.Filter = "Текстовый файл | *.tx";
+           
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             FD = new OpenFileDialog();
-            if(FD.ShowDialog()== DialogResult.Cancel)
+            FD.Filter = "Текстовый файл | *.txt";
+            if (FD.ShowDialog()== DialogResult.Cancel)
             {
                 FD.Dispose();
                 return;
             }
             if (FD.FileName != null)
             {
-                main.OpenText.
+                main.OpenText.Open(FD.FileName);
             }
 
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            main.FS.Find("привет пашан арома лампа ");
         }
     }
 }
