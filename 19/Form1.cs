@@ -39,7 +39,7 @@ namespace _19
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            main.FS.Find("привет пашан арома лампа ");
+            main.FS.Find("привет пашан  арома лампа ");
         }
     }
 }

@@ -8,50 +8,43 @@ namespace Logical
     public class FindSum
     {
         private string[] Text;
-        int Empty;
-        int NextSim;
+        bool Empty = false;
+
+        string ObTest = null;
         string ALF = @"[йцукенгшщзхъфывапролджэячсмитьбю]";
         string Soglass = @"[цкнгшщхфвпрлджчсмтб]";
         public string Find(string text)
         {
-            Text = new string[text.Length];
-
+          
+            
             for (int i = 0; i < text.Length; i++)
             {
-                Text[i] = text[i].ToString();
-            }
 
-
-            for (int o=0; o < Text.Length; o++)
-            {
-                if (text[o].ToString()==" ")
+                if (Regex.IsMatch(text[i].ToString(), ALF))
                 {
-                    NextSim = o+1;
-                    if (o != Text.Length) { 
-
-                        if (!Regex.IsMatch(Text[NextSim], ALF))
-                        {
-                            text[o].ToString().Replace(" ", "");
-                        }
-                        else
-                        {
-                            Empty++;
-                        }
-                    }
-                    else
-                    { 
-                        if (!Regex.IsMatch(Text[o], ALF))
-                        {
-                        text[o].ToString().Replace(" ", "");
-                        }
-                        else
-                        {
-                            Empty++;
-                        }
+                    ObTest += text[i].ToString();
+                    Empty = false;
+                }
+                else
+                {
+                    if (!Empty)
+                    {
+                        Empty = true;
+                        ObTest += text[i].ToString();
                     }
                 }
+
             }
-            
+            //Text = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            //Text = ObTest.Split(new char[] { ' '  });
+
+            for (int o = 0; o < ObTest.Length; o++)
+            {
+                Text[o] = ObTest[o].ToString();
+            }
+
+
+
             Text = new[] { text };
          
             return text;
