@@ -12,6 +12,7 @@ namespace Logical
         
         List<string> EndWords = new List<string>();
         List<int> Points = new List<int>();
+        int Lenght;
         string ObTest,MtoB = null;
         string ALF = @"[йцукенгшщзхъфывапролджэячсмитьбю]";
         string Soglass = @"[цкнгшщхфвпрлджчсмтб]";
@@ -48,6 +49,8 @@ namespace Logical
             Text = new string[ObTest.Length];
             Empty = false;
 
+           
+
             for (int o = 0; o < ObTest.Length; o++)
             {
               if(ObTest[o].ToString()==" "||ObTest[o].ToString()== null)
@@ -62,28 +65,34 @@ namespace Logical
                 Text[Text.Length-1].Replace(Text[Text.Length-1], ".");
             }
 
+            Lenght = Points.Count-1;
             for (int g = 0; g < Points.Count; g++)
             {
-             
-             
-                    for(int m = Points[g]-3; m < Points[g]; m++)
-                    {
-                        MtoB += text[m];
-                    }
-                //    MtoB += " ";
 
-                    if(Points[g] <= Points[Points.Count-1] - 3)
-                        for (int m = Points[g]; m < Points[g]+ 2; m++)
+                if (g % 2 == 0) { 
+
+                    for (int m = Points[g] - 3; m < Points[g]; m++)
+                    {
+                        MtoB += Text[m];
+                    }
+                    //      MtoB += " ";
+
+                    if (Points[g] <= Points[Lenght] - 3)
+                        for (int m = Points[g]; m < Points[g] + 4; m++)
                         {
-                            MtoB += text[m];
+                            
+                            MtoB += Text[m].ToString();
+
                         }
 
                     else
                         for (int m = Points[g]; m < Points.Count; m++)
                         {
-                            MtoB += text[m];
+                            MtoB += Text[m];
                         }
-             
+                    MtoB += " ";
+                }
+
             }
 
             Text = new[] { text };
