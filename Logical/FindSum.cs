@@ -9,6 +9,7 @@ namespace Logical
     {
         private string[] Text;
         bool Empty = false;
+        
         List<string> EndWords = new List<string>();
         List<int> Points = new List<int>();
         string ObTest,MtoB = null;
@@ -21,7 +22,10 @@ namespace Logical
             MtoB = null;
             Empty = false;
             Check = 0;
+
+            Points.Clear();
             EndWords.Clear();
+
             for (int i = 0; i < text.Length; i++)
             {
 
@@ -46,7 +50,10 @@ namespace Logical
 
             for (int o = 0; o < ObTest.Length; o++)
             {
-                
+              if(ObTest[o].ToString()==" "||ObTest[o].ToString()== null)
+                {
+                    Points.Add(o);
+                }  
                 Text[o] = ObTest[o].ToString();
             }
             //
@@ -55,34 +62,28 @@ namespace Logical
                 Text[Text.Length-1].Replace(Text[Text.Length-1], ".");
             }
 
-            for (int g = 0; g < Text.Length; g++)
+            for (int g = 0; g < Points.Count; g++)
             {
-                if (Text[g] == " ")
-                {
-                    Empty = true;
-                    Check = g;
-                }
-
-                if (Check > 0)
-                {
-                    for(int m = Check-3; m < Check; m++)
+             
+             
+                    for(int m = Points[g]-3; m < Points[g]; m++)
                     {
                         MtoB += text[m];
                     }
-                    MtoB += " ";
+                //    MtoB += " ";
 
-                    if(Check<=Text.Length-3)
-                        for (int m = Check ; m < Check+3; m++)
+                    if(Points[g] <= Points[Points.Count-1] - 3)
+                        for (int m = Points[g]; m < Points[g]+ 2; m++)
                         {
                             MtoB += text[m];
                         }
 
                     else
-                        for (int m = Check; m < Text.Length; m++)
+                        for (int m = Points[g]; m < Points.Count; m++)
                         {
                             MtoB += text[m];
                         }
-                }
+             
             }
 
             Text = new[] { text };
