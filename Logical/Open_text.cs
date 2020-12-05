@@ -10,8 +10,11 @@ namespace Logical
         public string Open(string filename)
         {
             string Text;
-            SR = new StreamReader(filename);
-            Text= SR.ReadToEnd();
+            SR = new StreamReader(filename,Encoding.Default);
+            
+            Text= SR.ReadToEnd().ToString();
+            SR.Close();
+            SR.Dispose();
             return Text;
         }
     }
