@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -9,9 +10,9 @@ namespace Logical
     {
         private string[] Text;
         bool Empty = false;
-        
-        List<string> EndWords = new List<string>();
+        List<string> EndWord = new List<string>();
         List<int> Points = new List<int>();
+
         int Lenght;
         string ObTest,MtoB = null;
         string ALF = @"[йцукенгшщзхъфывапролджэячсмитьбю]";
@@ -20,12 +21,18 @@ namespace Logical
         int Check ;
         public string Find(string text)
         {
-            MtoB = null;
+            MtoB="";
             Empty = false;
             Check = 0;
+            ObTest = null;
 
             Points.Clear();
-            EndWords.Clear();
+            EndWord.Clear();
+           
+            if(text[text.Length-1].ToString()!=" ")
+            {
+                text += " ";
+            }
 
             for (int i = 0; i < text.Length; i++)
             {
@@ -37,11 +44,12 @@ namespace Logical
                 }
                 else
                 {
-                    if (!Empty)
-                    {
-                        Empty = true;
-                        ObTest += text[i].ToString();
-                    }
+                    if(text[i].ToString()==" ")
+                        if (!Empty)
+                        {
+                            Empty = true;
+                            ObTest += text[i].ToString();
+                        }
                 }
 
             }
@@ -49,7 +57,6 @@ namespace Logical
             Text = new string[ObTest.Length];
             Empty = false;
 
-           
 
             for (int o = 0; o < ObTest.Length; o++)
             {
@@ -59,16 +66,11 @@ namespace Logical
                 }  
                 Text[o] = ObTest[o].ToString();
             }
-            //
-            if(Text[Text.Length-1]==" " || Text[Text.Length-1] ==null)
-            {
-                Text[Text.Length-1].Replace(Text[Text.Length-1], ".");
-            }
 
             Lenght = Points.Count-1;
+
             for (int g = 0; g < Points.Count; g++)
             {
-
                 if (g % 2 == 0) { 
 
                     for (int m = Points[g] - 3; m < Points[g]; m++)
@@ -78,7 +80,7 @@ namespace Logical
                     //      MtoB += " ";
 
                     if (Points[g] <= Points[Lenght] - 3)
-                        for (int m = Points[g]; m < Points[g] + 4; m++)
+                        for (int m = Points[g]+1; m < Points[g] + 4; m++)
                         {
                             
                             MtoB += Text[m].ToString();
@@ -92,8 +94,53 @@ namespace Logical
                         }
                     MtoB += " ";
                 }
-
             }
+
+            Empty = false;
+            Points.Clear();
+            for(int l = 0; l < MtoB.Length; l++)
+            {
+                if (MtoB[l].ToString()==" " )
+                {
+                    Points.Add(l);
+                    Empty = true;
+                }
+            
+            }
+
+           
+
+         
+            Lenght = 0;
+            for (int q = 0; q < Points.Count; q++)
+            {
+                ObTest = null;
+                if (q == 0)
+                {
+                    for(int t = 0; t < Points[q]; t++)
+                    {
+                        if (Regex.IsMatch(MtoB[t].ToString(), Soglass))
+                        {
+                            ObTest +=MtoB[t].ToString();
+                        }
+                    }
+                }
+                else
+                {
+                    for (int t = Points[q-1]; t < Points[q]; t++)
+                    {
+                        if (Regex.IsMatch(MtoB[t].ToString(), Soglass))
+                        {
+                            ObTest += MtoB[t].ToString();
+                        }
+                    }
+                }
+
+                if(ObTest.Length>4)
+                    EndWord.Add(ObTest);
+                
+            }
+
 
             Text = new[] { text };
          
