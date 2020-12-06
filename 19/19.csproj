@@ -81,13 +81,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\blet\Printer.csproj">
-      <Project>{5c4f4a71-685b-4602-af52-e5114429b921}</Project>
-      <Name>Printer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Logical\Logical.csproj">
       <Project>{e712cc40-e474-4b31-a5e1-b6c7bb9616c8}</Project>
       <Name>Logical</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Printering\Printering.csproj">
+      <Project>{73d7fd00-2c26-4ad9-97ea-5a40ffea5040}</Project>
+      <Name>Printering</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Printer
+namespace Printering
 {
     public class Class1
     {
         StreamReader streamToPrint; //поток для принтера
         Font printFont;
-
         // Метод печати файла
         // Входные параметры: передаются параметры шрифта
         // Результат: переданный текст выводится на печать,  
