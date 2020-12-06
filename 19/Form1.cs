@@ -165,14 +165,21 @@ namespace _19
 
         private void поискСловToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (!string.IsNullOrEmpty(toolStripTextBox1.Text) && !string.IsNullOrEmpty(richTextBox1.Text))
+                Find(toolStripTextBox1.Text);
+            //richTextBox1.SelectionColor = Color.Black;
+            else
+            {
+                MessageBox.Show("Поле пустует, миллорд");
+            }
         }
 
 
         void Find(string word)
         {
-            string str = "понедельник";
+           
             int i = 0;
+            if(!string.IsNullOrEmpty(word) && !string.IsNullOrEmpty(richTextBox1.Text))
             while (i <= richTextBox1.Text.Length - word.Length)
             {
                 //выделение цветом
@@ -181,9 +188,15 @@ namespace _19
                 richTextBox1.SelectionStart = i;
                 richTextBox1.SelectionLength = word.Length;
                 richTextBox1.SelectionColor = Color.Red;
+                
                 i += word.Length;
             }
 
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }
