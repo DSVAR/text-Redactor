@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Logical;
-using blet;
+using Printer;
 
 namespace _19
 {
