@@ -1,31 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Logical
+namespace blet
 {
-    public class Print
+    public class Class1
     {
         StreamReader streamToPrint; //поток для принтера
         Font printFont;
-        
+
         // Метод печати файла
         // Входные параметры: передаются параметры шрифта
         // Результат: переданный текст выводится на печать,  
         //            и, если нет ошибки, возвращается true
         //            иначе – false.
 
-        public bool PrintResult(string filename)
+        public bool PrintResult(Font pF,string filename)
         {
             try
             {
                 streamToPrint = new StreamReader(filename);
                 try
                 {
-
+                    printFont = pF;
                     PrintDocument pd = new PrintDocument();
                     pd.PrintPage += new PrintPageEventHandler
                        (this.pd_PrintPage);
@@ -43,7 +45,7 @@ namespace Logical
             }
         }
 
-        // Событие PrintPage вызывается для каждой страницы, которая будет напечатана
+
         private void pd_PrintPage(object sender, PrintPageEventArgs ev)
         {
             float linesPerPage = 0;
@@ -71,6 +73,6 @@ namespace Logical
             else
                 ev.HasMorePages = false;
         }
-
     }
+
 }

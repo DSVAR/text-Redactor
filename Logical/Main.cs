@@ -11,5 +11,6 @@ namespace Logical
         public FindSum FS = new FindSum();
 
         public Save_File SF = new Save_File();
+        public Print Print = new Print();
     }
 }

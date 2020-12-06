@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -80,10 +81,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\blet\blet.csproj">
+      <Project>{5c4f4a71-685b-4602-af52-e5114429b921}</Project>
+      <Name>blet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logical\Logical.csproj">
       <Project>{e712cc40-e474-4b31-a5e1-b6c7bb9616c8}</Project>
       <Name>Logical</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\diskette.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Listik.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Дискета.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Папка.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Печать.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
