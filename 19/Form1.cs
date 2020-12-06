@@ -20,6 +20,9 @@ namespace _19
         Class1 Class = new Class1();
 
         string Answer;
+
+        string style;
+        float sizes;
         public Form1()
         {
             InitializeComponent();
@@ -82,7 +85,7 @@ namespace _19
             }
             if (FD.FileName != null)
             {
-                Font font = new Font("Arial", 14, FontStyle.Bold);
+                Font font = new Font(style, sizes, FontStyle.Bold);
                 //main.Print.PrintResult(FD.FileName);
                 Class.PrintResult(font, FD.FileName);
 
@@ -92,6 +95,94 @@ namespace _19
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void открытьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FD = new OpenFileDialog();
+            FD.Filter = "Текстовый файл | *.txt";
+            if (FD.ShowDialog() == DialogResult.Cancel)
+            {
+                FD.Dispose();
+                return;
+            }
+            if (FD.FileName != null)
+            {
+                richTextBox1.Text = main.OpenText.Open(FD.FileName);
+                FD.Dispose();
+            }
+        }
+
+        private void сохранитьКакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+                SFD = new SaveFileDialog();
+                SFD.Filter = "Все файлы|*.*|  Текстовый файл без вычеслений (*.txt*)| *.txt";
+                //SFD.Filter += "All (*.*)| *.*";
+                if (SFD.ShowDialog() == DialogResult.Cancel)
+                {
+                    SFD.Dispose();
+                    return;
+                }
+                if (SFD.FileName != null)
+                {
+
+                    Answer =richTextBox1.Text;
+                    main.SF.Save(Answer, SFD.FileName);
+
+                }
+
+        }
+
+        private void размерToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            toolStripComboBox1.SelectedIndex = 0;
+            toolStripComboBox2.SelectedIndex = 0;
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                sizes = float.Parse(toolStripComboBox1.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void toolStripComboBox2_Click(object sender, EventArgs e)
+        {
+            style = toolStripComboBox2.Text;
+        }
+
+        private void поискСловToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        void Find(string word)
+        {
+            string str = "понедельник";
+            int i = 0;
+            while (i <= richTextBox1.Text.Length - word.Length)
+            {
+                //выделение цветом
+                i = richTextBox1.Text.IndexOf(word, i);
+                if (i < 0) break;
+                richTextBox1.SelectionStart = i;
+                richTextBox1.SelectionLength = word.Length;
+                richTextBox1.SelectionColor = Color.Red;
+                i += word.Length;
+            }
 
         }
     }
